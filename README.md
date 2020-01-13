@@ -4,9 +4,9 @@
 
 # OpenVX Samples
 
-<a href="https://www.khronos.org/openvx/" target="_blank">Khronos OpenVX™</a> is an open, royalty-free standard for cross platform acceleration of computer vision applications. OpenVX enables performance and power-optimized computer vision processing, especially important in embedded and real-time use cases such as face, body and gesture tracking, smart video surveillance, advanced driver assistance systems (ADAS), object and scene reconstruction, augmented reality, visual inspection, robotics and more.
+<a href="https://www.khronos.org/openvx/" target="_blank">Khronos OpenVX™</a> is an open, royalty-free standard for cross-platform acceleration of computer vision applications. OpenVX enables performance and power-optimized computer vision processing, especially important in embedded and real-time use cases such as face, body, and gesture tracking, smart video surveillance, advanced driver assistance systems (ADAS), object and scene reconstruction, augmented reality, visual inspection, robotics and more.
 
-In this project we provide OpenVX sample applications to use with any conformant implementation of OpenVX.
+In this project, we provide OpenVX sample applications to use with any conformant implementation of OpenVX.
 
 ## Canny Edge Detector Sample
 
@@ -22,12 +22,12 @@ In this sample we will create an OpenVX graph to run canny edge detection on an 
 
 ### Steps to run the canny sample
 
-* **Step - 1:** Build and install [Conformant OpenVX Implementation](https://github.com/KhronosGroup/OpenVX-sample-impl). In this example we will use the OpenVX Sample Implementation avaialble on [GitHub](https://github.com/KhronosGroup/OpenVX-sample-impl)
+* **Step - 1:** Build and install [Conformant OpenVX Implementation](https://github.com/KhronosGroup/OpenVX-sample-impl). In this example we will use the OpenVX Sample Implementation available on [GitHub](https://github.com/KhronosGroup/OpenVX-sample-impl)
 
 ```
 Build OpenVX on Linux
 
-* Git Clone project with recursive flag to get submodules
+* Git Clone project with a recursive flag to get submodules
 
       git clone --recursive https://github.com/KhronosGroup/OpenVX-sample-impl.git
 
@@ -43,7 +43,7 @@ Build OpenVX on Linux
 export OPENVX_DIR=PATH_TO_OPENVX/OpenVX-sample-impl/install/Linux/x64/Debug
 ```
 
-* **Step - 3:** Clone the OpenVX Samples project and build canny application
+* **Step - 3:** Clone the OpenVX Samples project and build the canny application
 
 ```
 cd ~/ && mkdir OpenVXSample-canny
@@ -51,7 +51,7 @@ cd OpenVXSample-canny/
 git clone https://github.com/kiritigowda/openvx-samples.git
 ```
 
-* **Step - 4:** CMake and Build canny application
+* **Step - 4:** CMake and Build the canny application
 
 ```
 mkdir canny-build && cd canny-build
