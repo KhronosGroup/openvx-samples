@@ -10,7 +10,7 @@ In this project we provide OpenVX sample applications to use with any conformant
 
 ## Canny Edge Detector Sample
 
-In this sample we will create an OpenVX graph to run canny edge detection on an image or a live camera. This sample application uses <a href="https://www.khronos.org/openvx/" target="_blank">OpenCV</a> to decode input image and display the output. 
+In this sample we will create an OpenVX graph to run canny edge detection on an image or a live camera. This sample application uses <a href="https://en.wikipedia.org/wiki/OpenCV" target="_blank">OpenCV</a> to decode input image and display the output. 
 
  <p align="center"><img width="60%" src="images/canny_image.PNG" /></p>
 
