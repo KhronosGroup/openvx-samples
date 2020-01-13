@@ -59,16 +59,18 @@ cmake -DOPENVX_INCLUDES=$OPENVX_DIR/include -DOPENVX_LIBRARIES=$OPENVX_DIR/bin/l
 make
 ```
 
-* **Step - 5:** Run Canny Live
+* **Step - 5:** Run Canny application
 
-```
-Usage:
-      ./cannyDetect --image <imageName>
-      ./cannyDetect --live 
-```
+    * **Live**
+    
+    ```
+    ./cannyEdgeDetector --live
+    ```
 
-```
-./cannyEdgeDetector --live
-```
 
-<p align="center"><img src="images/canny-app.png" /></p>
+    * **Image**
+    
+    ````
+    ./cannyEdgeDetector --image ../openvx-samples/images/face.png
+    ````
+ <p align="center"><img src="images/canny-app.png" /></p>
