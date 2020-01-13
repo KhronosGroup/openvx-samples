@@ -70,3 +70,5 @@ Usage:
 ```
 ./cannyEdgeDetector --live
 ```
+
+<p align="center"><img src="images/canny-app.png" /></p>
