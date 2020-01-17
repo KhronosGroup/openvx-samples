@@ -47,7 +47,7 @@ endif()
 
 list 	(APPEND SOURCES
 		source/AMD_VX_Pop_Bubble.cpp
-        source/AMD_VX_Pop_Donut.cpp
+        	source/AMD_VX_Pop_Donut.cpp
 		source/internal_dataTranslator.cpp
 		source/internal_publishKernels.cpp
 		source/internal_vxNodes.cpp
