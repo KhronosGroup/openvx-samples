@@ -45,6 +45,5 @@ else()
     message(STATUS "OPENVX_LIBRARIES: \t<empty>")
 endif()
 
-add_executable(skinToneDetector src/skinToneDetector.cpp)
+add_executable(${PROJECT_NAME} src/skinToneDetector.cpp)
 target_link_libraries(${PROJECT_NAME} ${OPENVX_LIBRARIES} ${OpenCV_LIBRARIES})
-

@@ -45,6 +45,7 @@ int main(int argc, char **argv)
 
     int width = 720, height = 480;
 
+    // create OpenVX Context
     vx_context context = vxCreateContext();
     ERROR_CHECK_OBJECT(context);
     vxRegisterLogCallback(context, log_callback, vx_false_e);
@@ -52,14 +53,17 @@ int main(int argc, char **argv)
     // load vx_pop kernels
     ERROR_CHECK_STATUS(vxLoadKernels(context, "vx_pop"));
     
+    // create OpenVX Graph
     vx_graph graph = vxCreateGraph(context);
     ERROR_CHECK_OBJECT(graph);
     
+    // create OpenVX Images
     vx_image input_rgb_image = vxCreateImage(context, width, height, VX_DF_IMAGE_RGB);
-    vx_image output_filtered_image = vxCreateImage(context, width, height, VX_DF_IMAGE_U8);
+    vx_image output_pop_image = vxCreateImage(context, width, height, VX_DF_IMAGE_U8);
     ERROR_CHECK_OBJECT(input_rgb_image);
-    ERROR_CHECK_OBJECT(output_filtered_image);
+    ERROR_CHECK_OBJECT(output_pop_image);
 
+    // create intermediate images
     vx_image yuv_image  = vxCreateVirtualImage(graph, width, height, VX_DF_IMAGE_IYUV);
     vx_image luma_image = vxCreateVirtualImage(graph, width, height, VX_DF_IMAGE_U8);
     vx_image canny_image = vxCreateVirtualImage(graph, width, height, VX_DF_IMAGE_U8);
@@ -67,6 +71,7 @@ int main(int argc, char **argv)
     ERROR_CHECK_OBJECT(luma_image);
     ERROR_CHECK_OBJECT(canny_image);
 
+    // create threshold variable
     vx_threshold hyst = vxCreateThreshold(context, VX_THRESHOLD_TYPE_RANGE, VX_TYPE_UINT8);
     vx_int32 lower = 80, upper = 100;
     vxSetThresholdAttribute(hyst, VX_THRESHOLD_ATTRIBUTE_THRESHOLD_LOWER, &lower, sizeof(lower));
@@ -74,6 +79,7 @@ int main(int argc, char **argv)
     ERROR_CHECK_OBJECT(hyst);
     vx_int32 gradient_size = 3;
 
+    // add nodes to the graph
     string option = argv[1];
     if (option == "--bubble")
     {
@@ -82,7 +88,7 @@ int main(int argc, char **argv)
             vxColorConvertNode(graph, input_rgb_image, yuv_image),
             vxChannelExtractNode(graph, yuv_image, VX_CHANNEL_Y, luma_image),
             vxCannyEdgeDetectorNode(graph, luma_image, hyst, gradient_size, VX_NORM_L1, canny_image),
-            vxExtPopNode_bubblePop(graph, canny_image, output_filtered_image)
+            vxExtPopNode_bubblePop(graph, canny_image, output_pop_image)
         };
         for( vx_size i = 0; i < sizeof( nodes ) / sizeof( nodes[0] ); i++ )
         {
@@ -97,7 +103,7 @@ int main(int argc, char **argv)
             vxColorConvertNode(graph, input_rgb_image, yuv_image),
             vxChannelExtractNode(graph, yuv_image, VX_CHANNEL_Y, luma_image),
             vxCannyEdgeDetectorNode(graph, luma_image, hyst, gradient_size, VX_NORM_L1, canny_image),
-            vxExtPopNode_donutPop(graph, canny_image, output_filtered_image)
+            vxExtPopNode_donutPop(graph, canny_image, output_pop_image)
         };
         for( vx_size i = 0; i < sizeof( nodes ) / sizeof( nodes[0] ); i++ )
         {
@@ -106,6 +112,7 @@ int main(int argc, char **argv)
         }
     }
 
+    // verify graph - only once
     ERROR_CHECK_STATUS( vxVerifyGraph( graph ) );
     
     Mat input;
@@ -137,19 +144,21 @@ int main(int argc, char **argv)
         vx_map_id map_id;
         vx_imagepatch_addressing_t addr;
         void * ptr;
-        ERROR_CHECK_STATUS( vxMapImagePatch( output_filtered_image, &rect, 0, &map_id, &addr, &ptr,
+        ERROR_CHECK_STATUS( vxMapImagePatch( output_pop_image, &rect, 0, &map_id, &addr, &ptr,
                                             VX_READ_ONLY, VX_MEMORY_TYPE_HOST, VX_NOGAP_X ) );
         Mat mat( height, width, CV_8U, ptr, addr.stride_y );
         imshow( "VX POP - LIVE", mat );
         if(waitKey(30) >= 0) break;
-        ERROR_CHECK_STATUS( vxUnmapImagePatch( output_filtered_image, map_id ) );
+        ERROR_CHECK_STATUS( vxUnmapImagePatch( output_pop_image, map_id ) );
     }
 
     ERROR_CHECK_STATUS( vxReleaseGraph( &graph ) );
+    ERROR_CHECK_STATUS(vxReleaseThreshold( &hyst ));
     ERROR_CHECK_STATUS( vxReleaseImage( &yuv_image ) );
     ERROR_CHECK_STATUS( vxReleaseImage( &luma_image ) );
+    ERROR_CHECK_STATUS( vxReleaseImage( &canny_image ) );
     ERROR_CHECK_STATUS( vxReleaseImage( &input_rgb_image ) );
-    ERROR_CHECK_STATUS( vxReleaseImage( &output_filtered_image ) );
+    ERROR_CHECK_STATUS( vxReleaseImage( &output_pop_image ) );
     ERROR_CHECK_STATUS( vxReleaseContext( &context ) );
     return 0;
 }

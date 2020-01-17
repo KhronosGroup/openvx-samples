@@ -45,6 +45,6 @@ else()
     message(STATUS "OPENVX_LIBRARIES: \t<empty>")
 endif()
 
-add_executable(cannyEdgeDetector src/canny.cpp)
+add_executable(${PROJECT_NAME} src/canny.cpp)
 target_link_libraries(${PROJECT_NAME} ${OPENVX_LIBRARIES} ${OpenCV_LIBRARIES})
 

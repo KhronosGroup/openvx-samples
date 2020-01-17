@@ -276,7 +276,7 @@ static vx_status VX_CALLBACK VX_bubbles_Kernel(vx_node node, const vx_reference 
 	Mat *mat, bl;
 
 	// wait to restart - press any key
-	if(poppedBubbles >= 120){ poppedBubbles = 0; waitKey(0);}
+	if(poppedBubbles >= 1015){ poppedBubbles = 0; waitKey(0);}
 
 	//Converting VX Image to OpenCV Mat
 	STATUS_ERROR_CHECK(VX_to_CV_Image(&mat, image_in));
@@ -288,7 +288,7 @@ static vx_status VX_CALLBACK VX_bubbles_Kernel(vx_node node, const vx_reference 
 	draw_pop_bubbles(Image.cols, Image.rows, &Image);
 
 	std::ostringstream statusStr;
-	if (poppedBubbles >= 100)
+	if (poppedBubbles >= 1000)
 	{
 		statusStr << "Congratulations! Click any Key to Contiue Popping!";
 		putText(Image, statusStr.str(), cvPoint(5, int(Image.rows/2)), FONT_HERSHEY_COMPLEX_SMALL, 1, cvScalar(200, 200, 250), 1, CV_AA);
