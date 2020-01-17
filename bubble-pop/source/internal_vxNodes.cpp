@@ -99,7 +99,7 @@ extern "C" SHARED_PUBLIC vx_node VX_API_CALL vxExtPopNode_donutPop(vx_graph grap
 	};
 
 	return vxCreateNodeByStructure(graph,
-		VX_KERNEL_EXT_POP_BUBBLE_POP,
+		VX_KERNEL_EXT_POP_DONUT_POP,
 		params,
 		dimof(params));
 }

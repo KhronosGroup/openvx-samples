@@ -56,6 +56,9 @@ list 	(APPEND SOURCES
 add_library(${PROJECT_NAME} SHARED ${SOURCES})
 target_link_libraries(${PROJECT_NAME} ${OPENVX_LIBRARIES} ${OpenCV_LIBRARIES})
 
+add_executable(vxPop source/AMD_app.cpp)
+target_link_libraries(vxPop ${OPENVX_LIBRARIES} ${OpenCV_LIBRARIES} ${PROJECT_NAME})
+
 file(COPY image DESTINATION ${CMAKE_BINARY_DIR})
 file(COPY gdf DESTINATION ${CMAKE_BINARY_DIR})
 
