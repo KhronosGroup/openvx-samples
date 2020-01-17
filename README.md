@@ -18,6 +18,8 @@ In this sample we will create an OpenVX graph to run VX Bubble Pop on a live cam
 
 * [OpenCV](https://github.com/opencv/opencv/releases/tag/3.4.0)
 
+* Camera
+
 ### Steps to run the Bubble Pop sample
 
 * **Step - 1:** Build and install [Conformant OpenVX Implementation](https://github.com/KhronosGroup/OpenVX-sample-impl). In this example we will use the OpenVX Sample Implementation available on [GitHub](https://github.com/KhronosGroup/OpenVX-sample-impl)
