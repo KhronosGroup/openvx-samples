@@ -112,16 +112,19 @@ int main(int argc, char **argv)
     // add nodes to the graph
     vx_node nodes[] =
     {
+        // extract R,G,B channels and compute R-G and R-B
         vxChannelExtractNode(graph, input_rgb_image, VX_CHANNEL_R, R_image),
         vxChannelExtractNode(graph, input_rgb_image, VX_CHANNEL_G, G_image),
         vxChannelExtractNode(graph, input_rgb_image, VX_CHANNEL_B, B_image),
         vxSubtractNode(graph, R_image, G_image, VX_CONVERT_POLICY_SATURATE, RmG_image),
         vxSubtractNode(graph, R_image, B_image, VX_CONVERT_POLICY_SATURATE, RmB_image),
+        // compute threshold
         vxThresholdNode(graph, R_image, thresh95, R95_image),
         vxThresholdNode(graph, G_image, thresh40, G40_image),
         vxThresholdNode(graph, B_image, thresh20, B20_image),
         vxThresholdNode(graph, RmG_image, thresh15, RmG15_image),
         vxThresholdNode(graph, RmB_image, thresh0, RmB0_image),
+        // aggregate all thresholded values to produce SKIN pixels
         vxAndNode(graph, R95_image, G40_image, and1_image),
         vxAndNode(graph, and1_image, B20_image, and2_image),
         vxAndNode(graph, RmG15_image, RmB0_image, and3_image),
@@ -131,7 +134,6 @@ int main(int argc, char **argv)
     for( vx_size i = 0; i < sizeof( nodes ) / sizeof( nodes[0] ); i++ )
     {
         ERROR_CHECK_OBJECT( nodes[i] );
-        ERROR_CHECK_STATUS( vxReleaseNode( &nodes[i] ) );
     }
 
     // verify graph
@@ -147,7 +149,7 @@ int main(int argc, char **argv)
         input = imread(imageLocation.c_str());
         if (input.empty()) {
            printf("Image not found\n");
-           return 0;
+           return -1;
         }
         resize(input, input, Size(width, height));
         imshow("inputWindow", input);
@@ -180,7 +182,7 @@ int main(int argc, char **argv)
         VideoCapture cap(0);
         if (!cap.isOpened()) {
             printf("Unable to open camera\n");
-            return 0;
+            return -1;
         }
         for(;;) {
             cap >> input;
@@ -219,7 +221,11 @@ int main(int argc, char **argv)
         return -1;
     }
 
-    // release images
+    // release objects
+    for( vx_size i = 0; i < sizeof( nodes ) / sizeof( nodes[0] ); i++ )
+    {
+        ERROR_CHECK_STATUS( vxReleaseNode( &nodes[i] ) );
+    }
     ERROR_CHECK_STATUS(vxReleaseGraph( &graph ));
     ERROR_CHECK_STATUS(vxReleaseThreshold( &thresh95 ));
     ERROR_CHECK_STATUS(vxReleaseThreshold( &thresh40 ));
