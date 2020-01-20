@@ -90,23 +90,23 @@ int main(int argc, char **argv)
     // create threshold values
     vx_threshold thresh95 = vxCreateThreshold(context, VX_THRESHOLD_TYPE_BINARY, VX_TYPE_UINT8);
     vx_int32 thresValue95 = 95;
-    vxSetThresholdAttribute(thresh95, VX_THRESHOLD_THRESHOLD_VALUE, &thresValue95, sizeof(thresValue95));
+    vxSetThresholdAttribute(thresh95, VX_THRESHOLD_THRESHOLD_VALUE, &thresValue95, sizeof(vx_int32));
     ERROR_CHECK_OBJECT(thresh95);
     vx_threshold thresh40 = vxCreateThreshold(context, VX_THRESHOLD_TYPE_BINARY, VX_TYPE_UINT8);
     vx_int32 thresValue40 = 40;
-    vxSetThresholdAttribute(thresh40, VX_THRESHOLD_THRESHOLD_VALUE, &thresValue40, sizeof(thresValue40));
+    vxSetThresholdAttribute(thresh40, VX_THRESHOLD_THRESHOLD_VALUE, &thresValue40, sizeof(vx_int32));
     ERROR_CHECK_OBJECT(thresh40);
     vx_threshold thresh20 = vxCreateThreshold(context, VX_THRESHOLD_TYPE_BINARY, VX_TYPE_UINT8);
     vx_int32 thresValue20 = 20;
-    vxSetThresholdAttribute(thresh20, VX_THRESHOLD_THRESHOLD_VALUE, &thresValue20, sizeof(thresValue20));
+    vxSetThresholdAttribute(thresh20, VX_THRESHOLD_THRESHOLD_VALUE, &thresValue20, sizeof(vx_int32));
     ERROR_CHECK_OBJECT(thresh20);
     vx_threshold thresh15 = vxCreateThreshold(context, VX_THRESHOLD_TYPE_BINARY, VX_TYPE_UINT8);
     vx_int32 thresValue15 = 15;
-    vxSetThresholdAttribute(thresh15, VX_THRESHOLD_THRESHOLD_VALUE, &thresValue15, sizeof(thresValue15));
+    vxSetThresholdAttribute(thresh15, VX_THRESHOLD_THRESHOLD_VALUE, &thresValue15, sizeof(vx_int32));
     ERROR_CHECK_OBJECT(thresh15);
     vx_threshold thresh0 = vxCreateThreshold(context, VX_THRESHOLD_TYPE_BINARY, VX_TYPE_UINT8);
     vx_int32 thresValue0 = 0;
-    vxSetThresholdAttribute(thresh0, VX_THRESHOLD_THRESHOLD_VALUE, &thresValue0, sizeof(thresValue0));
+    vxSetThresholdAttribute(thresh0, VX_THRESHOLD_THRESHOLD_VALUE, &thresValue0, sizeof(vx_int32));
     ERROR_CHECK_OBJECT(thresh0);
 
     // add nodes to the graph
@@ -140,7 +140,7 @@ int main(int argc, char **argv)
     ERROR_CHECK_STATUS( vxVerifyGraph( graph ) );
     
     string option = argv[1];
-    Mat input;
+    Mat input, input_rgb;
     cv::namedWindow("VX SkinTone Detect", cv::WINDOW_GUI_EXPANDED);
 
     if (option == "--image")
@@ -152,6 +152,7 @@ int main(int argc, char **argv)
            return -1;
         }
         resize(input, input, Size(width, height));
+        cvtColor(input, input_rgb, CV_BGR2RGB);
         imshow("inputWindow", input);
         vx_rectangle_t cv_rgb_image_region;
         cv_rgb_image_region.start_x    = 0;
@@ -160,8 +161,8 @@ int main(int argc, char **argv)
         cv_rgb_image_region.end_y      = height;
         vx_imagepatch_addressing_t cv_rgb_image_layout;
         cv_rgb_image_layout.stride_x   = 3;
-        cv_rgb_image_layout.stride_y   = input.step;
-        vx_uint8 * cv_rgb_image_buffer = input.data;
+        cv_rgb_image_layout.stride_y   = input_rgb.step;
+        vx_uint8 * cv_rgb_image_buffer = input_rgb.data;
         ERROR_CHECK_STATUS( vxCopyImagePatch( input_rgb_image, &cv_rgb_image_region, 0,
                                             &cv_rgb_image_layout, cv_rgb_image_buffer,
                                             VX_WRITE_ONLY, VX_MEMORY_TYPE_HOST ) );
@@ -187,6 +188,7 @@ int main(int argc, char **argv)
         for(;;) {
             cap >> input;
             resize(input, input, Size(width, height));
+            cvtColor(input, input_rgb, CV_BGR2RGB);
             imshow("inputWindow", input);
             if(waitKey(30) >= 0) break;
             vx_rectangle_t cv_rgb_image_region;
@@ -196,8 +198,8 @@ int main(int argc, char **argv)
             cv_rgb_image_region.end_y      = height;
             vx_imagepatch_addressing_t cv_rgb_image_layout;
             cv_rgb_image_layout.stride_x   = 3;
-            cv_rgb_image_layout.stride_y   = input.step;
-            vx_uint8 * cv_rgb_image_buffer = input.data;
+            cv_rgb_image_layout.stride_y   = input_rgb.step;
+            vx_uint8 * cv_rgb_image_buffer = input_rgb.data;
             ERROR_CHECK_STATUS( vxCopyImagePatch( input_rgb_image, &cv_rgb_image_region, 0,
                                                 &cv_rgb_image_layout, cv_rgb_image_buffer,
                                                 VX_WRITE_ONLY, VX_MEMORY_TYPE_HOST ) );
