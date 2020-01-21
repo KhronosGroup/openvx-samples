@@ -64,13 +64,13 @@ make
     * **Bubbles**
     
     ```
-    ./skinToneDetect --bubble
+    ./vxPop --bubble
     ```
     
     * **Donuts**
     
     ````
-    ./skinToneDetect --donut
+    ./vxPop --donut
     ````
 
 
