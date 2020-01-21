@@ -144,7 +144,9 @@ make
  
  ## Skin Tone Detector Sample
 
-In this sample we will create an OpenVX graph to run skintone detection on an image or a live camera. This sample application uses <a href="https://en.wikipedia.org/wiki/OpenCV" target="_blank">OpenCV</a> to decode input image and display the output. 
+In this sample we will create an OpenVX graph to run skintone detection on an image or a live camera. This sample application uses <a href="https://en.wikipedia.org/wiki/OpenCV" target="_blank">OpenCV</a> to decode input image and display the output.
+
+ <p align="center"><img width="60%" src="images/skintone-detect-app.png" /></p>
 
 ### Prerequisites
 
