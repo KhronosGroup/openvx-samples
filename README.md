@@ -8,6 +8,10 @@
 
 In this project, we provide OpenVX sample applications to use with any conformant implementation of OpenVX.
 
+* [VX Bubble Pop Sample](#vx-bubble-pop-sample)
+* [VX Canny Edge Detector Sample](#canny-edge-detector-sample)
+* [VX Skin Tone Detector Sample](#skin-tone-detector-sample)
+
  ## VX Bubble Pop Sample
 
 In this sample we will create an OpenVX graph to run VX Bubble Pop on a live camera. This sample application uses <a href="https://en.wikipedia.org/wiki/OpenCV" target="_blank">OpenCV</a> to decode input image, draw bubbles/donuts and display the output.
@@ -74,7 +78,6 @@ make
     ````
     ./vxPop --donut
     ````
-
 
 ## Canny Edge Detector Sample
 
@@ -206,3 +209,5 @@ make
     ````
     ./skinToneDetect --image ../openvx-samples/images/face.png
     ````
+## Contribution
+The samples VX Bubble Pop, VX Canny Edge Detector, & VX Skin Tone Detector are contributed by [AMD](https://www.amd.com/en) from their [MIVisionX Toolkit](https://gpuopen-professionalcompute-libraries.github.io/MIVisionX/). We welcome contributions to this project from all developers. Please open a pull request with details of your sample application to be accepted into this project.
