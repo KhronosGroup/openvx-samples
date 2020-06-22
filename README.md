@@ -46,7 +46,7 @@ Build OpenVX on Linux
 * **Step - 2:** Export OpenVX Directory Path
 
 ```
-export OPENVX_DIR=PATH_TO_OPENVX/OpenVX-sample-impl/install/Linux/x64/Debug
+export OPENVX_DIR=$(pwd)/install/Linux/x64/Debug
 ```
 
 * **Step - 3:** Clone the OpenVX Samples project and build the bubble pop application
@@ -111,7 +111,7 @@ Build OpenVX on Linux
 * **Step - 2:** Export OpenVX Directory Path
 
 ```
-export OPENVX_DIR=PATH_TO_OPENVX/OpenVX-sample-impl/install/Linux/x64/Debug
+export OPENVX_DIR=$(pwd)/install/Linux/x64/Debug
 ```
 
 * **Step - 3:** Clone the OpenVX Samples project and build the canny application
@@ -177,7 +177,7 @@ Build OpenVX on Linux
 * **Step - 2:** Export OpenVX Directory Path
 
 ```
-export OPENVX_DIR=PATH_TO_OPENVX/OpenVX-sample-impl/install/Linux/x64/Debug
+export OPENVX_DIR=$(pwd)/install/Linux/x64/Debug
 ```
 
 * **Step - 3:** Clone the OpenVX Samples project and build the Skin Tone application
