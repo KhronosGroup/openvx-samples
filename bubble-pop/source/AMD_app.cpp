@@ -222,7 +222,7 @@ int main(int argc, char **argv)
     {
         cap >> input;
         resize(input, input, Size(width, height));
-        cvtColor(input, input_rgb, CV_BGR2RGB);
+        cvtColor(input, input_rgb, COLOR_BGR2RGB);
         if(waitKey(30) >= 0) break;
         vx_rectangle_t cv_rgb_image_region;
         cv_rgb_image_region.start_x    = 0;
