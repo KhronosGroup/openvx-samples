@@ -29,7 +29,6 @@ THE SOFTWARE.
 
 #include"vx_pop.h"
 
-#include<omp.h>
 #include<stdio.h>
 #include<stdlib.h>
 #include<math.h>

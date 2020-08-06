@@ -45,13 +45,13 @@ else()
     message(STATUS "OPENVX_LIBRARIES: \t<empty>")
 endif()
 
-list 	(APPEND SOURCES
-		source/AMD_VX_Pop_Bubble.cpp
-        	source/AMD_VX_Pop_Donut.cpp
-		source/internal_dataTranslator.cpp
-		source/internal_publishKernels.cpp
-		source/internal_vxNodes.cpp
-	)
+list(APPEND SOURCES
+    source/AMD_VX_Pop_Bubble.cpp
+	source/AMD_VX_Pop_Donut.cpp
+	source/internal_dataTranslator.cpp
+	source/internal_publishKernels.cpp
+	source/internal_vxNodes.cpp
+)
 
 add_library(${PROJECT_NAME} SHARED ${SOURCES})
 target_link_libraries(${PROJECT_NAME} ${OPENVX_LIBRARIES} ${OpenCV_LIBRARIES})
@@ -69,3 +69,8 @@ if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "MSVC")
 else()
 	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fdata-sections")
 endif()
+
+install(TARGETS ${PROJECT_NAME} vxPop
+	RUNTIME DESTINATION bin
+	LIBRARY DESTINATION lib
+)

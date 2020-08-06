@@ -267,12 +267,12 @@ vx_status VX_CALLBACK VX_bubbles_Kernel(vx_node node, const vx_reference *parame
 	if (poppedDonuts >= 1000)
 	{
 		statusStr << "Congratulations! Click any Key to Contiue Popping!";
-		putText(Image, statusStr.str(), cvPoint(5, int(Image.rows/2)), FONT_HERSHEY_COMPLEX_SMALL, 1, cvScalar(200, 200, 250), 1, CV_AA);
+		cv::putText(Image, statusStr.str(), cv::Point(5, int(Image.rows/2)), FONT_HERSHEY_COMPLEX_SMALL, 1, cv::Scalar(200, 200, 250), 1, cv::LINE_AA);
 	}
 	else
 	{
 		statusStr << "Bubbles Popped: " << poppedDonuts;
-		putText(Image, statusStr.str(), cvPoint(30, 30), FONT_HERSHEY_COMPLEX_SMALL, 1.2, cvScalar(200, 200, 250), 1, CV_AA);
+		cv::putText(Image, statusStr.str(), cv::Point(30, 30), FONT_HERSHEY_COMPLEX_SMALL, 1.2, cv::Scalar(200, 200, 250), 1, cv::LINE_AA);
 	}
 
 	//Converting OpenCV Mat into VX Image
