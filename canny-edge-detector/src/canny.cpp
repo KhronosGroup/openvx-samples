@@ -107,7 +107,7 @@ int main(int argc, char **argv)
         cv_rgb_image_layout.stride_x = input.elemSize();
         cv_rgb_image_layout.stride_y = input.step;
         vx_uint8 * cv_rgb_image_buffer = input.data;
-	ERROR_CHECK_STATUS( vxCopyImagePatch( input_rgb_image, &cv_rgb_image_region, 0,
+        ERROR_CHECK_STATUS( vxCopyImagePatch( input_rgb_image, &cv_rgb_image_region, 0,
                                             &cv_rgb_image_layout, cv_rgb_image_buffer,
                                             VX_WRITE_ONLY, VX_MEMORY_TYPE_HOST ) );
         ERROR_CHECK_STATUS( vxProcessGraph( graph ) );
