@@ -1,6 +1,6 @@
 [![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
-<p align="center"><img width="50%" src="https://upload.wikimedia.org/wikipedia/en/thumb/d/dd/OpenVX_logo.svg/1920px-OpenVX_logo.svg.png" /></p>
+<p align="center"><img width="50%" src="https://upload.wikimedia.org/wikipedia/commons/d/dd/OpenVX_logo.svg" /></p>
 
 # OpenVX Samples
 
