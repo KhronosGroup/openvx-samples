@@ -229,9 +229,11 @@ int main(int argc, char **argv)
         cv_rgb_image_region.start_y    = 0;
         cv_rgb_image_region.end_x      = width;
         cv_rgb_image_region.end_y      = height;
-        vx_imagepatch_addressing_t cv_rgb_image_layout;
-        cv_rgb_image_layout.stride_x   = 3;
-        cv_rgb_image_layout.stride_y   = input_rgb.step;
+        vx_imagepatch_addressing_t cv_rgb_image_layout{};
+        cv_rgb_image_layout.dim_x = input_rgb.cols;
+        cv_rgb_image_layout.dim_y = input_rgb.rows;
+        cv_rgb_image_layout.stride_x = input_rgb.elemSize();
+        cv_rgb_image_layout.stride_y = input_rgb.step;
         vx_uint8 * cv_rgb_image_buffer = input_rgb.data;
         ERROR_CHECK_STATUS( vxCopyImagePatch( input_rgb_image, &cv_rgb_image_region, 0,
                                             &cv_rgb_image_layout, cv_rgb_image_buffer,
