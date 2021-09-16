@@ -201,13 +201,13 @@ make
     * **Live**
     
     ```
-    ./skinToneDetect --live
+    ./skinToneDetector --live
     ```
     
     * **Image**
     
     ````
-    ./skinToneDetect --image ../openvx-samples/images/face.png
+    ./skinToneDetector --image ../openvx-samples/images/face.png
     ````
 ## Contribution
 The samples VX Bubble Pop, VX Canny Edge Detector, & VX Skin Tone Detector are contributed by [AMD](https://www.amd.com/en) from their [MIVisionX Toolkit](https://gpuopen-professionalcompute-libraries.github.io/MIVisionX/). We welcome contributions to this project from all developers. Please open a pull request with details of your sample application to be accepted into this project.
